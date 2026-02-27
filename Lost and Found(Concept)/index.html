@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReConnect – Secure Campus Lost & Found</title>
+    <meta name="description"
+        content="ReConnect is a secure, priority-driven campus Lost and Found platform with smart matching, claim verification, and authority coordination.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔗</text></svg>">
+</head>
+
+<body>
+
+    <!-- ══════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════ -->
+    <div id="urgent-alert-bar" class="urgent-alert-bar"></div>
+
+    <nav id="navbar">
+        <div class="nav-inner">
+            <div class="nav-brand" onclick="RC.app.navigate('home')">
+                <div class="nav-logo-icon">🔗</div>
+                <span class="nav-brand-name">ReConnect</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a data-page="home" onclick="RC.app.navigate('home')">🏠 Home</a></li>
+                <li><a data-page="report-lost" onclick="RC.app.navigate('report-lost')">📢 Report Lost</a></li>
+                <li><a data-page="report-found" onclick="RC.app.navigate('report-found')">📦 Report Found</a></li>
+                <li><a data-page="browse" onclick="RC.app.navigate('browse')">🔍 Browse Items</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <div class="notification-bell" id="notif-bell" title="Notifications">
+                    🔔
+                    <span class="notif-badge" id="notif-badge" style="display:none;">0</span>
+                </div>
+                <button class="btn-admin-access" onclick="RC.app.navigate('admin')">🛡️ Admin</button>
+                <div style="font-size:0.82rem; color:var(--text-secondary); padding:0.3rem 0.6rem; background:var(--bg-card); border-radius:var(--radius-sm); border:1px solid var(--border-glass);"
+                    id="nav-user">Student</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ══════════════════════════════════════════════
+     PAGES
+══════════════════════════════════════════════ -->
+    <main>
+
+        <!-- ─── HOME ─────────────────────────────────── -->
+        <section id="page-home" class="page">
+
+            <div class="hero-section">
+                <div class="hero-badge">🔒 Secure • Verified • Priority-Driven</div>
+                <h1 class="hero-title">Campus Lost &amp; Found<br><span class="gradient-text">Reimagined with
+                        Security</span></h1>
+                <p class="hero-subtitle">The intelligent recovery platform eliminating false claims, accelerating
+                    recoveries, and connecting students with the right authorities — instantly.</p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary btn-lg" onclick="RC.app.navigate('report-lost')">📢 Report Lost
+                        Item</button>
+                    <button class="btn btn-secondary btn-lg" onclick="RC.app.navigate('report-found')">📦 Report Found
+                        Item</button>
+                    <button class="btn btn-outline btn-lg" onclick="RC.app.navigate('browse')">🔍 Browse All
+                        Items</button>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-icon">📋</div>
+                    <div class="stat-number" id="stat-total">0</div>
+                    <div class="stat-label">Total Reports</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-number" id="stat-recovered">0</div>
+                    <div class="stat-label">Items Recovered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number" id="stat-today">0</div>
+                    <div class="stat-label">Active Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-number" id="stat-matches">0</div>
+                    <div class="stat-label">Smart Matches</div>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <h2 class="section-title" style="text-align:center;">Why ReConnect?</h2>
+                <div class="features-grid">
+                    <div class="feature-card" onclick="RC.app.navigate('report-lost')" style="cursor:pointer;">
+                        <span class="feature-icon">🛡️</span>
+                        <h3>Secure Claims Architecture</h3>
+                        <p>Hidden verification questions, unique identifiers, and mandatory admin approval for
+                            high-value items eliminate false claims entirely.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🚨</span>
+                        <h3>Critical Priority System</h3>
+                        <p>ID cards, wallets, phones automatically escalated to HIGH PRIORITY. Instant admin alerts and
+                            real-time dashboard pinning.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📱</span>
+                        <h3>Device Tracking Support</h3>
+                        <p>Integrated Find My Device guidance panel for lost phones and laptops. Step-by-step recovery
+                            assistance built right in.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🏛️</span>
+                        <h3>Authority Coordination</h3>
+                        <p>Location-based authority contact suggestions. Lost at Library? Get the Help Desk. Hostel?
+                            Warden's office — instantly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🤖</span>
+                        <h3>Smart Auto-Matching</h3>
+                        <p>AI-powered engine scores lost vs found items on category, keywords, location & time. Notifies
+                            both parties on match.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🔐</span>
+                        <h3>Multi-Layer Verification</h3>
+                        <p>3-attempt limit, account flagging, audit trail, and dual owner+admin sign-off for every
+                            high-priority item claim.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform Tools Section -->
+            <div class="platform-tools-section">
+                <div
+                    style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+                    <h2 class="section-title" style="margin:0;">🔧 Platform Tools That Can Help</h2>
+                    <button class="btn btn-outline btn-sm" onclick="window.RC.admin.openGuidelines()">📖 View Situation
+                        Guidelines →</button>
+                </div>
+                <div class="platform-tools-grid">
+                    <a href="https://www.google.com/android/find" target="_blank" rel="noopener" class="tool-card">
+                        <div class="tool-card-icon">🌐</div>
+                        <div class="tool-card-name">Google Find My Device</div>
+                        <div class="tool-card-desc">Locate, ring, lock, or erase your <strong>Android phone</strong>
+                            remotely</div>
+                        <div class="tool-card-tag">Android</div>
+                    </a>
+                    <a href="https://www.icloud.com/find" target="_blank" rel="noopener" class="tool-card">
+                        <div class="tool-card-icon">🍎</div>
+                        <div class="tool-card-name">Apple Find My</div>
+                        <div class="tool-card-desc">Track <strong>iPhone, iPad, Mac, AirPods</strong> via iCloud. Works
+                            offline with Bluetooth</div>
+                        <div class="tool-card-tag">Apple</div>
+                    </a>
+                    <a href="https://account.microsoft.com/devices" target="_blank" rel="noopener" class="tool-card">
+                        <div class="tool-card-icon">🪟</div>
+                        <div class="tool-card-name">Windows Find My Device</div>
+                        <div class="tool-card-desc">Locate your <strong>Windows laptop</strong> and lock it remotely via
+                            Microsoft Account</div>
+                        <div class="tool-card-tag">Windows</div>
+                    </a>
+                    <a href="https://www.samsung.com/global/galaxy/apps/smartthings/" target="_blank" rel="noopener"
+                        class="tool-card">
+                        <div class="tool-card-icon">📱</div>
+                        <div class="tool-card-name">Samsung SmartThings Find</div>
+                        <div class="tool-card-desc">Track <strong>Galaxy phones, buds, watches</strong> via nearby
+                            devices — even when offline</div>
+                        <div class="tool-card-tag">Samsung</div>
+                    </a>
+                    <a href="https://mydevice.google.com" target="_blank" rel="noopener" class="tool-card">
+                        <div class="tool-card-icon">🗺️</div>
+                        <div class="tool-card-name">Google Maps Timeline</div>
+                        <div class="tool-card-desc">Review <strong>Location History</strong> to find where you had your
+                            device last</div>
+                        <div class="tool-card-tag">All Android</div>
+                    </a>
+                    <a href="https://consumer.ftc.gov/articles/lost-or-stolen-phone" target="_blank" rel="noopener"
+                        class="tool-card">
+                        <div class="tool-card-icon">🚫</div>
+                        <div class="tool-card-name">Block / Lock SIM</div>
+                        <div class="tool-card-desc">Call your carrier to <strong>suspend your SIM</strong> and prevent
+                            unauthorized calls/data use</div>
+                        <div class="tool-card-tag">All Phones</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="recent-section">
+                <h2 class="section-title">🚨 Urgent Items Needing Attention</h2>
+                <div id="recent-high-priority"></div>
+                <div style="margin-top:1.5rem; text-align:center;">
+                    <button class="btn btn-outline" onclick="RC.app.navigate('browse')">View All Items →</button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ─── REPORT LOST ──────────────────────────── -->
+        <section id="page-report-lost" class="page">
+            <div class="form-page">
+                <div class="form-page-header">
+                    <div class="form-page-title">
+                        <div class="form-page-icon icon-lost">📢</div>
+                        <h2>Report Lost Item</h2>
+                    </div>
+                    <p style="color:var(--text-secondary); font-size:0.9rem;">Fill in as much detail as possible.
+                        High-priority items are escalated automatically.</p>
+                </div>
+
+                <!-- Quick Guidelines Banner -->
+                <div class="quick-guide-banner">
+                    <div class="quick-guide-title">💡 Before You Report — Quick Checklist</div>
+                    <div class="quick-guide-grid">
+                        <div class="quick-guide-item">📱 <strong>Lost a phone?</strong> Lock it immediately via <a
+                                href="https://www.google.com/android/find" target="_blank">Google Find My Device</a> or
+                            <a href="https://www.icloud.com/find" target="_blank">Apple Find My</a></div>
+                        <div class="quick-guide-item">💳 <strong>Lost ID/Wallet?</strong> Call Admin Office now:
+                            <strong>+91-79-2630-1000</strong></div>
+                        <div class="quick-guide-item">💻 <strong>Lost laptop?</strong> Lock via <a
+                                href="https://account.microsoft.com/devices" target="_blank">Microsoft Account</a> or <a
+                                href="https://www.icloud.com/find" target="_blank">iCloud</a> and note the serial number
+                        </div>
+                        <div class="quick-guide-item">🏢 <strong>Check counters first!</strong> Library Help Desk,
+                            Cafeteria, and Security Office often have unclaimed items</div>
+                    </div>
+                    <div style="margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid rgba(139,92,246,0.15);">
+                        <button class="btn btn-outline btn-sm" style="font-size:0.75rem;"
+                            onclick="window.RC.admin.openGuidelines()">📖 Full Situation Guidelines →</button>
+                    </div>
+                </div>
+
+                <form id="form-lost" autocomplete="off">
+
+                    <!-- Basic Info -->
+                    <div class="form-section">
+                        <div class="form-section-header">📋 Item Information</div>
+                        <div class="form-section-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="lost-name">Item Name <span
+                                            class="required">*</span></label>
+                                    <input type="text" id="lost-name" class="form-control"
+                                        placeholder="e.g. Black Leather Wallet" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="lost-category">Category <span
+                                            class="required">*</span></label>
+                                    <select id="lost-category" class="form-control" required>
+                                        <option value="">Select...</option>
+                                    </select>
+                                    <input type="text" id="lost-category-other" class="form-control"
+                                        style="display:none; margin-top:0.5rem;"
+                                        placeholder="Please specify the category...">
+                                    <div id="lost-priority-notice" class="priority-notice"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="lost-description">Description <span
+                                        class="required">*</span></label>
+                                <textarea id="lost-description" class="form-control" rows="3"
+                                    placeholder="Describe the item in detail — color, brand, distinguishing marks, contents, etc."
+                                    required></textarea>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="lost-date">Date Lost <span
+                                            class="required">*</span></label>
+                                    <input type="date" id="lost-date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="lost-location">Location Lost <span
+                                            class="required">*</span></label>
+                                    <select id="lost-location" class="form-control" required>
+                                        <option value="">Select...</option>
+                                    </select>
+                                    <input type="text" id="lost-location-other" class="form-control"
+                                        style="display:none; margin-top:0.5rem;"
+                                        placeholder="Describe the exact location...">
+                                    <div id="lost-authority-panel" class="authority-panel"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verification -->
+                    <div class="form-section">
+                        <div class="form-section-header">🔐 Claim Verification Setup</div>
+                        <div class="form-section-body">
+                            <div class="info-box" style="margin-bottom:1rem;"><span>ℹ️</span><span>Set a secret
+                                    verification question. Anyone claiming this item must answer correctly. <strong>Do
+                                        NOT reveal the answer publicly.</strong></span></div>
+                            <div class="form-group">
+                                <label class="form-label" for="lost-verif-q">Secret Verification Question <span
+                                        class="required">*</span></label>
+                                <input type="text" id="lost-verif-q" class="form-control"
+                                    placeholder="e.g. What sticker is on the back cover? / What is written on the inner tag?"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="lost-verif-a">Answer (Hidden from public) <span
+                                        class="required">*</span></label>
+                                <input type="password" id="lost-verif-a" class="form-control"
+                                    placeholder="Your secret answer..." required autocomplete="new-password">
+                                <div class="form-hint">This answer is stored securely and only compared during claim
+                                    verification.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="form-section">
+                        <div class="form-section-header">📞 Contact Preference</div>
+                        <div class="form-section-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="lost-contact-pref">Preferred Contact Method <span
+                                            class="required">*</span></label>
+                                    <select id="lost-contact-pref" class="form-control" required>
+                                        <option value="">Select...</option>
+                                        <option value="email">Email</option>
+                                        <option value="phone">Phone</option>
+                                        <option value="platform">Platform Notification Only</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="lost-contact-info">Contact Info <span
+                                            class="required">*</span></label>
+                                    <input type="text" id="lost-contact-info" class="form-control"
+                                        placeholder="your@email.edu or phone number" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="form-section">
+                        <div class="form-section-header">📷 Item Photo (Optional)</div>
+                        <div class="form-section-body">
+                            <div class="upload-area" id="lost-upload-area">
+                                <div class="upload-icon">📷</div>
+                                <div class="upload-text">Click to upload or drag &amp; drop</div>
+                                <div class="upload-subtext">PNG, JPG, WEBP up to 5MB</div>
+                                <input type="file" id="lost-image" accept="image/*" style="display:none;">
+                                <img id="lost-image-preview" class="upload-preview" style="display:none;" alt="Preview">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Urgent Toggle -->
+                    <div class="form-section">
+                        <div class="form-section-header">⚡ Priority Settings</div>
+                        <div class="form-section-body">
+                            <div class="toggle-row">
+                                <div>
+                                    <div class="toggle-label">⚡ Mark as URGENT</div>
+                                    <div class="toggle-desc">Enable for immediate admin alert, real-time banner, and
+                                        faster matching scan.</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="lost-urgent">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:1rem; justify-content:flex-end;">
+                        <button type="button" class="btn btn-outline" onclick="RC.app.navigate('home')">Cancel</button>
+                        <button type="submit" class="btn btn-primary btn-lg">📢 Submit Lost Report</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ─── REPORT FOUND ─────────────────────────── -->
+        <section id="page-report-found" class="page">
+            <div class="form-page">
+                <div class="form-page-header">
+                    <div class="form-page-title">
+                        <div class="form-page-icon icon-found">📦</div>
+                        <h2>Report Found Item</h2>
+                    </div>
+                    <p style="color:var(--text-secondary); font-size:0.9rem;">Help someone get their item back. Our
+                        smart engine will match it to the owner automatically.</p>
+                </div>
+
+                <!-- Quick Guidelines Banner for Finders -->
+                <div class="quick-guide-banner"
+                    style="border-color:rgba(6,182,212,0.25);background:rgba(6,182,212,0.04);">
+                    <div class="quick-guide-title" style="color:var(--color-accent-light);">🤝 Thank You for Returning!
+                        — What to Do</div>
+                    <div class="quick-guide-grid">
+                        <div class="quick-guide-item">🚫 <strong>Do NOT open</strong> wallets, bags, or envelopes —
+                            preserve the owner's privacy</div>
+                        <div class="quick-guide-item">🏢 <strong>High-value items</strong> (ID cards, phones, laptops) —
+                            deposit at the Security Office</div>
+                        <div class="quick-guide-item">🔒 <strong>Withhold one detail</strong> (e.g., a sticker or inner
+                            label) so only the true owner can verify</div>
+                        <div class="quick-guide-item">📞 <strong>Add your contact</strong> below so the owner can reach
+                            you directly if the item is with you</div>
+                    </div>
+                </div>
+
+                <form id="form-found" autocomplete="off">
+
+                    <div class="form-section">
+                        <div class="form-section-header">📋 Item Information</div>
+                        <div class="form-section-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="found-name">Item Name <span
+                                            class="required">*</span></label>
+                                    <input type="text" id="found-name" class="form-control"
+                                        placeholder="e.g. Blue Umbrella" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="found-category">Category <span
+                                            class="required">*</span></label>
+                                    <select id="found-category" class="form-control" required>
+                                        <option value="">Select...</option>
+                                    </select>
+                                    <input type="text" id="found-category-other" class="form-control"
+                                        style="display:none; margin-top:0.5rem;"
+                                        placeholder="Please specify the category...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="found-description">Description <span
+                                        class="required">*</span></label>
+                                <textarea id="found-description" class="form-control" rows="3"
+                                    placeholder="Describe what you found — color, brand, condition, any visible identifiers..."
+                                    required></textarea>
+                                <div class="form-hint">Be descriptive but do NOT reveal sensitive information (IDs,
+                                    account details) publicly.</div>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="found-date">Date Found <span
+                                            class="required">*</span></label>
+                                    <input type="date" id="found-date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="found-location">Location Found <span
+                                            class="required">*</span></label>
+                                    <select id="found-location" class="form-control" required>
+                                        <option value="">Select...</option>
+                                    </select>
+                                    <input type="text" id="found-location-other" class="form-control"
+                                        style="display:none; margin-top:0.5rem;"
+                                        placeholder="Describe the exact location where you found it...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-header">🏢 Storage Information</div>
+                        <div class="form-section-body">
+                            <div class="form-group">
+                                <label class="form-label" for="found-storage">Where is the item stored? <span
+                                        class="required">*</span></label>
+                                <select id="found-storage" class="form-control" required>
+                                    <option value="">Select storage location...</option>
+                                    <option value="Security Office">Security Office (Main Gate)</option>
+                                    <option value="Library Help Desk">Library Help Desk</option>
+                                    <option value="Department Office">Department Office</option>
+                                    <option value="With Finder">With Finder (Contact Me)</option>
+                                    <option value="Warden Office">Warden Office</option>
+                                    <option value="Admin Office">Admin Office</option>
+                                </select>
+                                <div class="form-hint">Please hand high-value items (ID cards, wallets, phones) to the
+                                    Security Office.</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="found-contact-info">Your Contact Info (Optional)</label>
+                                <input type="text" id="found-contact-info" class="form-control"
+                                    placeholder="Email or phone — so the owner can reach you directly">
+                                <div class="form-hint">Only shared with verified item owners. Helps speed up reunion if
+                                    item is stored with you.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-header">📷 Item Photo (Optional)</div>
+                        <div class="form-section-body">
+                            <div class="upload-area" id="found-upload-area">
+                                <div class="upload-icon">📷</div>
+                                <div class="upload-text">Click to upload or drag &amp; drop</div>
+                                <div class="upload-subtext">PNG, JPG, WEBP up to 5MB</div>
+                                <input type="file" id="found-image" accept="image/*" style="display:none;">
+                                <img id="found-image-preview" class="upload-preview" style="display:none;"
+                                    alt="Preview">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box" style="margin-bottom:1.5rem;"><span>🤖</span><span>After submission, our Smart
+                            Matching Engine will scan for potential owners and notify them automatically.</span></div>
+
+                    <div style="display:flex; gap:1rem; justify-content:flex-end;">
+                        <button type="button" class="btn btn-outline" onclick="RC.app.navigate('home')">Cancel</button>
+                        <button type="submit" class="btn btn-secondary btn-lg">📦 Submit Found Report</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ─── BROWSE ───────────────────────────────── -->
+        <section id="page-browse" class="page">
+            <div class="browse-layout">
+
+                <!-- Sidebar Filters -->
+                <aside class="filter-sidebar">
+                    <div
+                        style="font-size:1rem; font-weight:700; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+                        <span>⚙️</span> Filters
+                    </div>
+
+                    <div class="filter-title">Item Type</div>
+                    <div style="display:flex; gap:0.4rem; margin-bottom:0.5rem; flex-wrap:wrap;">
+                        <button class="btn btn-outline btn-sm active" data-type-filter="all"
+                            style="font-size:0.75rem;">All</button>
+                        <button class="btn btn-outline btn-sm" data-type-filter="lost"
+                            style="font-size:0.75rem; color:#fca5a5;">Lost</button>
+                        <button class="btn btn-outline btn-sm" data-type-filter="found"
+                            style="font-size:0.75rem; color:#6ee7b7;">Found</button>
+                    </div>
+
+                    <div class="filter-title">Priority</div>
+                    <div style="display:flex; gap:0.4rem; margin-bottom:0.5rem; flex-wrap:wrap;">
+                        <button class="btn btn-outline btn-sm active" data-priority-filter=""
+                            style="font-size:0.75rem;">All</button>
+                        <button class="btn btn-outline btn-sm" data-priority-filter="urgent"
+                            style="font-size:0.75rem; color:#fcd34d;">⚡ Urgent</button>
+                        <button class="btn btn-outline btn-sm" data-priority-filter="high"
+                            style="font-size:0.75rem; color:#fca5a5;">🚨 High</button>
+                        <button class="btn btn-outline btn-sm" data-priority-filter="normal"
+                            style="font-size:0.75rem;">Normal</button>
+                    </div>
+
+                    <div class="filter-title">Category</div>
+                    <div id="filter-categories"></div>
+
+                    <div class="filter-title">Location</div>
+                    <div id="filter-locations"></div>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="browse-main">
+                    <div class="search-bar-row">
+                        <div class="search-input-wrapper">
+                            <span class="search-icon">🔍</span>
+                            <input type="search" id="search-input"
+                                placeholder="Search by name, description, category, location...">
+                        </div>
+                    </div>
+
+                    <div class="browse-results-header">
+                        <span class="results-count" id="results-count">Loading...</span>
+                        <div style="display:flex; gap:0.5rem;">
+                            <button class="btn btn-primary btn-sm" onclick="RC.app.navigate('report-lost')">📢 Report
+                                Lost</button>
+                            <button class="btn btn-secondary btn-sm" onclick="RC.app.navigate('report-found')">📦 Report
+                                Found</button>
+                        </div>
+                    </div>
+
+                    <div id="browse-grid">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ─── ADMIN ────────────────────────────────── -->
+        <section id="page-admin" class="page">
+            <div id="admin-content">
+                <!-- Populated by admin.js -->
+                <div class="loader"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ══════════════════════════════════════════════
+     MODAL OVERLAY
+══════════════════════════════════════════════ -->
+    <div id="modal-overlay">
+        <div id="modal-container"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+     TOAST CONTAINER
+══════════════════════════════════════════════ -->
+    <div id="toast-container" aria-live="polite"></div>
+
+    <!-- ══════════════════════════════════════════════
+     SCRIPTS (load order matters)
+══════════════════════════════════════════════ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/match.js"></script>
+    <script src="js/escalation.js"></script>
+    <script src="js/report.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/claim.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+        // Initialize search on first browse visit
+        document.addEventListener('DOMContentLoaded', function () {
+            // Pre-populate the date fields with today
+            const today = new Date().toISOString().split('T')[0];
+            const lostDate = document.getElementById('lost-date');
+            const foundDate = document.getElementById('found-date');
+            if (lostDate) lostDate.value = today;
+            if (foundDate) foundDate.value = today;
+        });
+    </script>
+
+</body>
+
+</html>
